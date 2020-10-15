@@ -1,24 +1,46 @@
-# README
+## userテーブル
+| Colum              | Type     | Option      |
+|--------------------|----------|-------------|
+| name               |string    | null: false |
+| email              |string    | null: false |
+| password           |string    | null: false |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Association
+has_many: room_user
+has_many: dog, through: dog_users
+has_many: message
 
-Things you may want to cover:
+## dogテーブル
+| Colum       | Type     | Option          |
+|-------------|----------|-----------------|
+|name         |string    | null: false     |
+|dog_breed    |string    | null: false     |
+|old          |integer   | null: false     |
+|personality  |integer   | null: false     |
 
-* Ruby version
+### Association
+belongs_to: user
+has_many: content
 
-* System dependencies
 
-* Configuration
+## dog_users テーブル
+｜Colum   | Type       | Option                            |
+|---------|------------|-----------------------------------|
+| user_id | references | null: false, foreign_key: true    |
+| dog_id  | references | null: false, foreign_key: true    |
 
-* Database creation
+### Association
 
-* Database initialization
+belongs_to :user
+belongs_to :memo
 
-* How to run the test suite
+## contentテーブル
+| Colum   | Type     | Option                         |
+|-------- |----------|--------------------------------|
+| user_id | integer  | null: false, foreign_key: true |
+| dog_id  | integer  | null: false, foreign_key: true |
+| content | string   | null: false,                   |
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+belongs_to: user
+belongs_to: dog
